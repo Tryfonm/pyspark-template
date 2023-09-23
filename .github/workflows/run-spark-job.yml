@@ -17,7 +17,7 @@ jobs:
 
       - name: List changed files
         run: |
-          echo "THIS RUNS"
+          echo "THIS RUNS" > ../test
 
 
 
