@@ -7,6 +7,16 @@ import os
 def get_logger(
     logger_name: str, directory: str = "./logs", level=logging.DEBUG
 ) -> logging.Logger:
+    """_summary_
+
+    Args:
+        logger_name (str): _description_
+        directory (str, optional): _description_. Defaults to "./logs".
+        level (_type_, optional): _description_. Defaults to logging.DEBUG.
+
+    Returns:
+        logging.Logger: _description_
+    """
     logger = logging.getLogger(logger_name)
     logger.setLevel(level)
 

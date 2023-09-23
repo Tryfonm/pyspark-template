@@ -5,6 +5,7 @@ APPNAME = "mySimpleApp"
 
 
 def test_spark_manager():
+    """_summary_"""
     env = "test"
 
     with spark_manager(env) as spark:
