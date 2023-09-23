@@ -8,7 +8,7 @@ on:
       - 'src/spark_template/**'  # Specify the path to the directory of interest
 
 jobs:
-  detect-pushed-files:
+  submit-jobs:
     runs-on: self-hosted
 
     steps:
@@ -17,29 +17,4 @@ jobs:
 
       - name: List changed files
         run: |
-            changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
-
-            for file in $changed_files; do
-            if [[ $file == *"src/spark-template/"* ]]; then
-                github_http_link="https://github.com/${{ github.repository }}/blob/${{ github.sha }}/$file"
-                echo "File $file was pushed to /src/spark-template" > /home/tryfonm/projects/pyspark-template/gh-logs
-                echo "GitHub HTTP Link: $github_http_link" >> /home/tryfonm/projects/pyspark-template/gh-logs
-            fi
-            done
-
-
-# jobs:
-#   custom-command:
-#     runs-on: self-hosted
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Run Custom Command
-#         run: |
-#           # Replace this with the command you want to run
-#           echo "Running custom command"
-
-
-#           name: Detect Pushed Files in /src/spark_template
+            kubectl exec -it spark-driver-ss-0 /opt/spark/workspace/submit-jobs.sh

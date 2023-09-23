@@ -6,10 +6,10 @@ from typing import Generator
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, desc, avg, concat, lit, rand
 
-from .logger import get_logger
+# from .logger import get_logger
 
 ENV = os.getenv("ENV", "dev")
-LOGGER = get_logger(Path(__file__).stem)
+# LOGGER = get_logger(Path(__file__).stem)
 APPNAME = "mySimleApp"
 
 
