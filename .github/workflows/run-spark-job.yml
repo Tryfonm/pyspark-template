@@ -17,8 +17,15 @@ jobs:
 
       - name: List changed files
         run: |
-            echo "triggered successfully" > /home/tryfonm/projects/pyspark-template/gh-logs
-            # /home/tryfonm/projects/pyspark-template/spark-k8s-demo/submit-example-job-github.sh
+            changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+            for file in $changed_files; do
+            if [[ $file == *"src/spark-template/"* ]]; then
+                github_http_link="https://github.com/${{ github.repository }}/blob/${{ github.sha }}/$file"
+                echo "File $file was pushed to /src/spark-template" > /home/tryfonm/projects/pyspark-template/gh-logs
+                echo "GitHub HTTP Link: $github_http_link" >> /home/tryfonm/projects/pyspark-template/gh-logs
+            fi
+            done
 
 
 # jobs:
