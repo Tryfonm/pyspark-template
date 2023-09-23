@@ -17,7 +17,16 @@ jobs:
 
       - name: List changed files
         run: |
-          echo "THIS RUNS" > ../test
+            # Use git diff to list files changed in the latest push
+            changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+            # Iterate through the changed files
+            for file in $changed_files; do
+            # Check if the file path contains 'src/spark_template'
+            if [[ $file == *"src/spark_template/"* ]]; then
+                echo "IT RUNS"  # Echo "IT RUNS" in the terminal
+            fi
+            done
 
 
 
