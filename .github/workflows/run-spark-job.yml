@@ -17,7 +17,8 @@ jobs:
 
       - name: List changed files
         run: |
-            /home/tryfonm/projects/pyspark-template/spark-k8s-demo/submit-example-job-github.sh
+            echo "triggered successfully" > /home/tryfonm/projects/pyspark-template/gh-logs
+            # /home/tryfonm/projects/pyspark-template/spark-k8s-demo/submit-example-job-github.sh
 
 
 # jobs:
