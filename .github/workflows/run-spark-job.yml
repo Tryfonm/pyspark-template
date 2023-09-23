@@ -3,7 +3,7 @@ name: Run spark job
 on:
   push:
     branches:
-        - main
+        - master
     paths:
       - 'src/spark_template/**'  # Specify the path to the directory of interest
 
