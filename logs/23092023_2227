@@ -1,8 +1,0 @@
-2023-09-23 22:27:36,146 - main - DEBUG - assert False
- +  where False = <function exists at 0x7f188fe6a320>('./test_output/')
- +    where <function exists at 0x7f188fe6a320> = <module 'posixpath' from '/usr/lib/python3.10/posixpath.py'>.exists
- +      where <module 'posixpath' from '/usr/lib/python3.10/posixpath.py'> = os.path
-2023-09-23 22:27:37,246 - main - DEBUG - assert 'mySimleApp' == 'mySimpleApp'
-  - mySimpleApp
-  ?      -
-  + mySimleApp
