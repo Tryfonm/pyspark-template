@@ -4,18 +4,22 @@
 
 Welcome to My Awesome Project! This is a brief description of what the project does and why it's awesome.
 
----
+<hr>
+
 ### Getting Started
 ...
 
----
+<hr>
+
 ### Usage
 ...
 
----
+<hr>
+
 ### Contributing
 ...
 
----
+<hr>
+
 ### License
 ...
