@@ -1,0 +1,47 @@
+name: Run spark job
+
+on:
+  push:
+    branches:
+        - main
+    paths:
+      - 'src/spark_template/**'  # Specify the path to the directory of interest
+
+jobs:
+  detect-pushed-files:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: List changed files
+        run: |
+          # Use git diff to list files changed in the latest push
+          changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+          # Iterate through the changed files
+          for file in $changed_files; do
+            # Check if the file path contains 'src/spark_template'
+            if [[ $file == *"src/spark_template/"* ]]; then
+              echo "File $file was pushed to /src/spark_template"
+            fi
+          done
+
+
+
+# jobs:
+#   custom-command:
+#     runs-on: self-hosted
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Run Custom Command
+#         run: |
+#           # Replace this with the command you want to run
+#           echo "Running custom command"
+
+
+#           name: Detect Pushed Files in /src/spark_template
