@@ -3,7 +3,7 @@ name: Run spark job
 on:
   push:
     branches:
-        - master
+        - main
     paths:
       - 'src/spark_template/**'  # Specify the path to the directory of interest
 
@@ -17,7 +17,16 @@ jobs:
 
       - name: List changed files
         run: |
-          echo "Trigger works for `src/spark_template/**`"
+          # Use git diff to list files changed in the latest push
+          changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          echo $changed_files > changedFiles
+          # Iterate through the changed files
+          for file in $changed_files; do
+            # Check if the file path contains 'src/spark_template'
+            if [[ $file == *"src/spark_template/"* ]]; then
+              echo "File $file was pushed to /src/spark_template" > changedFile
+            fi
+          done
 
 
 
