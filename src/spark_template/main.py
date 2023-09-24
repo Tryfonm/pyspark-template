@@ -1,16 +1,15 @@
 import os
-from pathlib import Path
 from contextlib import contextmanager
 from typing import Generator
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, desc, avg, concat, lit, rand
 
-# from .logger import get_logger
+from spark_template.logger import get_logger
 
 ENV = os.getenv("ENV", "dev")
-# LOGGER = get_logger(Path(__file__).stem)
 APPNAME = "mySimleApp"
+LOGGER = get_logger(APPNAME)
 
 
 @contextmanager
@@ -27,8 +26,7 @@ def spark_manager(env: str) -> Generator[SparkSession, None, None]:
     try:
         yield spark
     except Exception as e:
-        # LOGGER.debug(e)
-        print(e) # FIX THIS
+        LOGGER.debug(e)
     finally:
         spark.stop()
 
@@ -94,5 +92,5 @@ def run_job():
 
 
 if __name__ == "__main__":
-    ##
+    ###
     run_job()
