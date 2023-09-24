@@ -27,7 +27,8 @@ def spark_manager(env: str) -> Generator[SparkSession, None, None]:
     try:
         yield spark
     except Exception as e:
-        LOGGER.debug(e)
+        # LOGGER.debug(e)
+        print(e) # FIX THIS
     finally:
         spark.stop()
 
@@ -93,5 +94,5 @@ def run_job():
 
 
 if __name__ == "__main__":
-    #  
+    #  #
     run_job()
