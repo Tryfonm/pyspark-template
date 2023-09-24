@@ -16,5 +16,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: List changed files
-        run: |
-            kubectl exec -it spark-driver-ss-0 /opt/spark/workspace/submit-jobs.sh
+        run: 'kubectl exec -it spark-driver-ss-0 sh -c /opt/spark/workspace/submit-jobs.sh'
