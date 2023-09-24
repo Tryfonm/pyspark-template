@@ -2,7 +2,7 @@ import os
 from contextlib import contextmanager
 from typing import Generator
 
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.functions import col, desc, avg, concat, lit, rand
 
 from spark_template.logger import get_logger
@@ -31,7 +31,7 @@ def spark_manager(env: str) -> Generator[SparkSession, None, None]:
         spark.stop()
 
 
-def extract(spark, num_rows=1000000):
+def extract(spark: SparkSession, num_rows: int = 1000000) -> DataFrame:
     """_summary_
 
     Args:
@@ -48,10 +48,11 @@ def extract(spark, num_rows=1000000):
         .withColumn("Salary", (rand() * 50000 + 30000).cast("bigint"))
     )
     synthetic_data.show()
+
     return synthetic_data
 
 
-def transform(df):
+def transform(df: DataFrame) -> DataFrame:
     """_summary_
 
     Args:
@@ -70,20 +71,20 @@ def transform(df):
         .orderBy(desc("AverageSalary"))
     )
 
-    grouped_by_age_ordered.show()
     return grouped_by_age_ordered
 
 
-def load(df):
+def load(df: DataFrame) -> None:
     """_summary_
 
     Args:
         df (_type_): _description_
     """
+    df.show()
     df.write.format("parquet").mode("overwrite").save("./output/")
 
 
-def run_job():
+def run_job() -> None:
     """_summary_"""
     with spark_manager(env=ENV) as spark:
         df = extract(spark, num_rows=1000000)
@@ -92,5 +93,4 @@ def run_job():
 
 
 if __name__ == "__main__":
-    ###
     run_job()
