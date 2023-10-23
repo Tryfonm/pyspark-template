@@ -8,8 +8,8 @@ install:
 
 test-docker:
 	@echo "\n>>> spark_version: $$SPARK_VERSION\n"
-	pip3 install -r requirements_dev.txt && pip3 install -e .
-	pytest
+	## pip install -r requirements_dev.txt && pip install -e .
+	. venv/bin/activate && tox || true
 
 clean:
 	@echo "\n>>> cleaning artifacts\n"
