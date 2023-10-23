@@ -1,6 +1,7 @@
 import os
+from datetime import datetime
 from contextlib import contextmanager
-from typing import Generator
+from typing import Generator, Optional
 
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.functions import col, desc, avg, concat, lit, rand
@@ -74,14 +75,16 @@ def transform(df: DataFrame) -> DataFrame:
     return grouped_by_age_ordered
 
 
-def load(df: DataFrame) -> None:
+def load(df: DataFrame, output_path: Optional[str] = None) -> None:
     """_summary_
 
     Args:
         df (_type_): _description_
     """
     df.show()
-    df.write.format("parquet").mode("overwrite").save("./output/")
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    output_path if output_path is not None else f"./output/{APPNAME}_{timestamp}/"
+    df.write.format("parquet").mode("overwrite").save(output_path)
 
 
 def run_job() -> None:

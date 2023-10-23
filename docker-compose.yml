@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  jupyter:
+    build:
+      context: .
+      dockerfile: ./docker/jupyter.Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/workspace/
+  test:
+    image: tryfonm/spark-node:latest
+    volumes:
+      - ./:/opt/spark/workspace/:rw
+    command: >
+      apt install python3-venv -y &&
+      make install &&
+      source venv/bin/activate &&
+      tox
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/test.Dockerfile
+  serve:
+    build:
+      context: .
+      dockerfile: ./docker/serve.Dockerfile
+    ports:
+      - "8080:8080"
