@@ -11,7 +11,6 @@ test-docker:
 	pip3 install -r requirements_dev.txt && pip3 install -e .
 	pytest
 
-
 clean:
 	@echo "\n>>> cleaning artifacts\n"
 	rm -rf ./.mypy_cache/ ./.pytest_cache/ ./.tox/ ./logs ./output/ .coverage || true
